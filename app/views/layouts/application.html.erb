@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+  <title>Social works</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <%=link_to 'Social Works','/welcome/index', class:"navbar-brand"%>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><%=link_to 'Inicio','/welcome/index'%></li>
+        <li><%=link_to 'Generar ataques','/attacks/new'%></li>
+        <li><%=link_to 'Victimas','/welcome/victimas'%></li>
+        <li><%=link_to 'Servicios','/welcome/servicios'%></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to 'Editar perfil '+current_user.email, edit_user_registration_path, :class => 'glyphicon glyphicon-user' %> 
+          </li>
+          <li>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'glyphicon glyphicon-log-out'  %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Registrarse", new_user_registration_path, :class => 'glyphicon glyphicon-user'  %>
+          </li>
+          <li>
+            <%= link_to "Ingresar", new_user_session_path, :class => 'glyphicon glyphicon-log-in'  %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<%= yield %>
+</body>
+</html>

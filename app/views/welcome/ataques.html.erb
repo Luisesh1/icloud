@@ -1,0 +1,14 @@
+<%
+
+require 'mechanize'
+
+mechanize = Mechanize.new
+
+page = mechanize.get('http://www.animeid.tv/')
+
+
+
+
+%>
+
+<%=page.body.html_safe%>
