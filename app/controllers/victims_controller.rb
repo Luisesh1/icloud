@@ -10,7 +10,6 @@ class VictimsController < ApplicationController
 	end
 	def new 
 		@V= Victim.new
-		VictimMailer.uuu.deliver
 	end
 
 	def create
